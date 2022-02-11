@@ -2,10 +2,5 @@
 
 
 {% block body %}
-    <div class="card">
-        <div class="card-body">
-            <h1 class="display-4">MTG Edition Game</h1>
-            <p class="lead">A game to test your skills in recognizing MTG editions.</p>
-        </div>
-    </div>
+    <div id="app" {{ stimulus_controller('quiz') }}></div>
 {% endblock %}
