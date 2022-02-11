@@ -1,5 +1,4 @@
-import { createApp } from 'vue';
+import { createApp, compile } from 'vue';
+import Quiz from '../pages/quiz';
 
-export const app = createApp({
-    template: "I am alive"
-});
+export const app = createApp(Quiz);

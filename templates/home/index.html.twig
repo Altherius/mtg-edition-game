@@ -1,6 +1,32 @@
 {% extends 'base.html.twig' %}
 
-
 {% block body %}
-    <div id="app" {{ stimulus_controller('quiz') }}></div>
+    <div class="row">
+        <div class="col-12 col-md-6">
+            <div class="card">
+                <div class="card-body">
+                    <h3 class="text-center">Play</h3>
+                    <hr>
+                    <div class="text-center">
+                        <a href="{{ path('quiz') }}">
+                            <i class="fas fa-gamepad text-center fa-10x"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-12 col-md-6">
+            <div class="card">
+                <div class="card-body">
+                    <h3 class="text-center">Leaderboard</h3>
+                    <hr>
+                    <div class="text-center">
+                        <a href="#">
+                            <i class="fas fa-trophy text-center fa-10x"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 {% endblock %}

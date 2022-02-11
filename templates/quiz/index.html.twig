@@ -1,0 +1,7 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Play - {{ parent() }}{% endblock %}
+
+{% block body %}
+    <div id="app" {{ stimulus_controller('quiz') }}></div>
+{% endblock %}

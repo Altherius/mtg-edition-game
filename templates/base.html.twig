@@ -15,18 +15,12 @@
     </head>
     <body>
 
-        <nav class="navbar navbar-dark bg-dark">
-            <div class="container-fluid">
-                <a class="navbar-brand" href="{{ path('home') }}">MTG Editions</a>
-            </div>
-        </nav>
+        {{ include('includes/navbar.html.twig') }}
 
         <div class="container mt-3">
             {% block body %}{% endblock %}
         </div>
 
-        <footer class="bg-dark mt-3">
-            <p class="text-center text-light small p-3">Made with <i class="fas fa-heart"></i> by Maxime Eychenne</p>
-        </footer>
+        {{ include('includes/footer.html.twig') }}
     </body>
 </html>
