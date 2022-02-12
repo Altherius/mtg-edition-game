@@ -18,8 +18,8 @@ use Symfony\Component\Validator\Constraints as Assert;
 #[ORM\Table(name: '`user`')]
 #[UniqueEntity(fields: ["email"], message: "There is already an account with this email")]
 #[ApiResource(
-    denormalizationContext: ["user:write"],
-    normalizationContext: ["user:read"]
+    denormalizationContext: ["groups" => ["user:write"]],
+    normalizationContext: ["groups" => ["user:read"]]
 )]
 class User implements UserInterface, PasswordAuthenticatedUserInterface
 {
