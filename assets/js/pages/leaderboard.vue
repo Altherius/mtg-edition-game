@@ -13,7 +13,7 @@
           </tr>
         </thead>
         <tbody>
-          <tr v-for="score in scores">
+          <tr v-for="score in scores" :key="score.id">
             <td>{{ score.user.firstname }} {{ score.user.lastname }}</td>
             <td>{{ score.score }}</td>
             <td>{{ format_date(score.scoredAt) }}</td>
