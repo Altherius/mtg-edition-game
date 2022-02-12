@@ -1,5 +1,5 @@
 import { Controller} from "@hotwired/stimulus";
-import { app } from '../Quiz';
+import { app } from '@/Quiz';
 
 export default class extends Controller {
     connect() {

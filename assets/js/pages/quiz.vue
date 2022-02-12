@@ -33,8 +33,8 @@
 </template>
 
 <script>
-import ScryfallCardComponent from '../components/scryfall_card_image';
-import ScoreComponent from '../components/score';
+import ScryfallCardComponent from '@/components/scryfall_card_image';
+import ScoreComponent from '@/components/score';
 
 export default {
   name: 'Quiz',

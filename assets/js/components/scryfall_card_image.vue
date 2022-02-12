@@ -1,6 +1,6 @@
 <template>
   <div class="text-center">
-    <img class="w-100 scryfall-image" src="{{ imageSrc }}" alt="{{ imageAlt }}">
+    <img :class="[$style['scryfall-image'], 'w-100']" :src="imageSrc" :alt="imageAlt">
   </div>
 </template>
 
@@ -14,7 +14,7 @@ export default {
 }
 </script>
 
-<style>
+<style module>
   .scryfall-image {
     max-width: 336px;
   }
