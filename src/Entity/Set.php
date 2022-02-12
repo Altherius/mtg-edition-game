@@ -12,7 +12,8 @@ use Symfony\Component\Validator\Constraints as Assert;
 #[ORM\Table(name: '`set`')]
 #[ApiResource(
     denormalizationContext: ["groups" => ["set:write"]],
-    normalizationContext: ["groups" => ["set:read"]]
+    normalizationContext: ["groups" => ["set:read"]],
+    paginationEnabled: false
 )]
 class Set
 {

@@ -1,0 +1,7 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Leaderboard - {{ parent() }}{% endblock %}
+
+{% block body %}
+    <div id="app" {{ stimulus_controller('leaderboard') }}></div>
+{% endblock %}
