@@ -12,10 +12,5 @@
 <script>
 export default {
   name: 'Quiz',
-  data() {
-    return {
-      firstName: "Maxime"
-    }
-  }
 }
 </script>
