@@ -19,7 +19,7 @@
               <quiz-answer-info-component v-if="givenAnswer" :given-answer="givenAnswer" :actual-answer="actualAnswer" />
 
               <div class="form-group my-2">
-                <button type="button" class="btn btn-primary" @click="scoreCheck">Guess</button>
+                <button type="button" class="btn btn-primary" @click="scoreCheck" :disabled="imageLoading">Guess</button>
               </div>
 
             </div>
