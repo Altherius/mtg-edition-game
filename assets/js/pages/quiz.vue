@@ -84,7 +84,7 @@ export default {
       this.currentImageSrc = "#";
       this.currentImageAlt = "";
 
-      axios.get('https://api.scryfall.com/cards/random?q=not:digital&unique=prints').then((response) => {
+      axios.get('https://api.scryfall.com/cards/random?q=not:digital not:promo&unique=prints').then((response) => {
         let json = response.data;
         this.currentImageSrc = json.image_uris.normal;
         this.currentImageAlt = json.name;
@@ -100,7 +100,7 @@ export default {
       this.sets = json['hydra:member'];
     });
 
-    axios.get('https://api.scryfall.com/cards/random?q=not:digital&unique=prints').then((response) => {
+    axios.get('https://api.scryfall.com/cards/random?q=not:digital not:promo&unique=prints').then((response) => {
       let json = response.data;
       this.currentImageSrc = json.image_uris.normal;
       this.currentImageAlt = json.name;
