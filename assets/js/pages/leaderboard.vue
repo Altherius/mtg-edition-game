@@ -47,7 +47,7 @@ export default {
   methods: {
     format_date(value) {
       if(value) {
-        return moment(String(value)).format('DD/MM/YYYY HH:MM') + ' (' + moment(String(value)).fromNow() + ')';
+        return moment(String(value)).format('DD/MM/YYYY HH:mm') + ' (' + moment(String(value)).fromNow() + ')';
       }
     }
   }
