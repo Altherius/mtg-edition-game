@@ -87,7 +87,7 @@ export default {
       axios.get('https://api.scryfall.com/cards/random?q=not:digital not:promo&unique=prints').then((response) => {
         let json = response.data;
         if (json.card_faces) {
-          this.currentImageSrc = json.card_faces.image_uris.normal;
+          this.currentImageSrc = json.card_faces[0].image_uris.normal;
         } else {
           this.currentImageSrc = json.image_uris.normal;
         }
@@ -107,7 +107,7 @@ export default {
     axios.get('https://api.scryfall.com/cards/random?q=not:digital not:promo&unique=prints').then((response) => {
       let json = response.data;
       if (json.card_faces) {
-        this.currentImageSrc = json.card_faces.image_uris.normal;
+        this.currentImageSrc = json.card_faces[0].image_uris.normal;
       } else {
         this.currentImageSrc = json.image_uris.normal;
       }
