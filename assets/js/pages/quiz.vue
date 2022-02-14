@@ -63,6 +63,8 @@ export default {
   methods: {
     scoreCheck() {
 
+      this.givenAnswer = null;
+
       axios.get('/api/sets/' + this.selected.id).then((response) => {
         let json = response.data;
         let givenSet = json['scryfallUuid'];
