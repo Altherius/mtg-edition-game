@@ -63,11 +63,11 @@ export default {
   methods: {
     scoreCheck() {
 
-      this.actualAnswer = this.currentSet;
-
       axios.get('/api/sets/' + this.selected.id).then((response) => {
         let json = response.data;
         let givenSet = json['scryfallUuid'];
+
+        this.actualAnswer = this.currentSet;
         this.givenAnswer = json['name'];
 
         if (givenSet === this.imageSetId) {
