@@ -19,7 +19,7 @@
               <quiz-answer-info-component v-if="givenAnswer" :given-answer="givenAnswer" :actual-answer="actualAnswer" />
 
               <div class="form-group my-2">
-                <button type="button" class="btn btn-primary" @click="scoreCheck" :disabled="imageLoading">Guess</button>
+                <button type="button" class="btn btn-primary" @click="answer" :disabled="imageLoading">Guess</button>
               </div>
 
             </div>
@@ -58,30 +58,23 @@ export default {
       sets: [],
       givenAnswer: null,
       actualAnswer: null,
+      remainingTime: 15000,
     }
   },
   methods: {
-    scoreCheck() {
 
-      this.givenAnswer = null;
+    lose() {
+      if (this.score >= 5) {
+        axios.post('/api/high_scores', {'score': this.score});
+      }
+      this.score = 0;
+    },
 
-      axios.get('/api/sets/' + this.selected.id).then((response) => {
-        let json = response.data;
-        let givenSet = json['scryfallUuid'];
+    win() {
+      this.score++;
+    },
 
-        this.actualAnswer = this.currentSet;
-        this.givenAnswer = json['name'];
-
-        if (givenSet === this.imageSetId) {
-          this.score++;
-        } else {
-          if (this.score >= 5) {
-            axios.post('/api/high_scores', {'score': this.score});
-          }
-          this.score = 0;
-        }
-      });
-
+    fetchCard() {
       this.imageLoading = true;
       this.currentImageSrc = "#";
       this.currentImageAlt = "";
@@ -98,6 +91,29 @@ export default {
         this.currentSet = json.set_name;
         this.imageLoading = false;
       });
+    },
+
+    answer() {
+
+      /* Erase previous given answer */
+      this.givenAnswer = null;
+
+      /* Check the given set */
+      axios.get('/api/sets/' + this.selected.id).then((response) => {
+        let json = response.data;
+        let givenSet = json['scryfallUuid'];
+
+        this.actualAnswer = this.currentSet;
+        this.givenAnswer = json['name'];
+
+        if (givenSet === this.imageSetId) {
+          this.win();
+        } else {
+          this.lose();
+        }
+      });
+
+      this.fetchCard();
     }
   },
   mounted() {
@@ -106,18 +122,7 @@ export default {
       this.sets = json['hydra:member'];
     });
 
-    axios.get('https://api.scryfall.com/cards/random?q=not:digital not:promo&unique=prints').then((response) => {
-      let json = response.data;
-      if (json.card_faces && !json.image_uris) {
-        this.currentImageSrc = json.card_faces[0].image_uris.normal;
-      } else {
-        this.currentImageSrc = json.image_uris.normal;
-      }
-      this.currentImageAlt = json.name;
-      this.imageSetId = json.set_id;
-      this.currentSet = json.set_name;
-      this.imageLoading = false;
-    });
+    this.fetchCard();
   }
 }
 </script>
