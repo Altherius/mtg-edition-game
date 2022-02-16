@@ -5,7 +5,7 @@
         Guess the edition
       </h1>
       <hr>
-      <scryfall-card-component :image-src="currentImageSrc" :image-alt="currentImageAlt" :loading="imageLoading" :set="imageSetId"/>
+      <scryfall-card-component :image-src="currentImageSrc" :image-alt="currentImageAlt" :loading="imageLoading" :set="imageSetId" @imageLoaded="endLoading"/>
       <hr>
       <div class="text-center">
         <div class="row">
@@ -74,22 +74,21 @@ export default {
       this.score++;
     },
 
+    endLoading() {
+      this.imageLoading = false;
+    },
+
     fetchCard() {
       this.imageLoading = true;
       this.currentImageSrc = "#";
       this.currentImageAlt = "";
 
-      axios.get('https://api.scryfall.com/cards/random?q=not:digital not:promo&unique=prints').then((response) => {
+      axios.get('/api/cards/random').then((response) => {
         let json = response.data;
-        if (json.card_faces && !json.image_uris) {
-          this.currentImageSrc = json.card_faces[0].image_uris.normal;
-        } else {
-          this.currentImageSrc = json.image_uris.normal;
-        }
+        this.currentImageSrc = json.image;
         this.currentImageAlt = json.name;
-        this.imageSetId = json.set_id;
-        this.currentSet = json.set_name;
-        this.imageLoading = false;
+        this.imageSetId = json.linkedSet.scryfallUuid;
+        this.currentSet = json.linkedSet.name;
       });
     },
 
@@ -111,9 +110,8 @@ export default {
         } else {
           this.lose();
         }
+        this.fetchCard();
       });
-
-      this.fetchCard();
     }
   },
   mounted() {

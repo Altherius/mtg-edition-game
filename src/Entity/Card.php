@@ -11,25 +11,16 @@ use Symfony\Component\Serializer\Annotation\Groups;
 #[ORM\Entity(repositoryClass: CardRepository::class)]
 #[ApiResource(
     itemOperations: [
-        'get',
-        'put',
-        'patch',
-        'delete',
         'random' => [
             'method' => 'get',
             'path' => '/cards/random',
             'controller' => CardRandomController::class,
             'read' => false,
-            "openapi_context" => [
-                "parameters" => [
-                    "id" => [
-                        "name" => "id",
-                        "in" => "path",
-                        "required" => false,
-                    ]
-                ]
-            ]
-        ]
+        ],
+        'get',
+        'put',
+        'patch',
+        'delete',
     ],
     denormalizationContext: ["groups" => "card:write"],
     normalizationContext: ["groups" => "card:read"]

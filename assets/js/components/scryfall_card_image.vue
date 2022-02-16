@@ -1,7 +1,7 @@
 <template>
   <div class="text-center">
     <div v-show="!loading">
-      <img :class="[$style['scryfall-image'], 'w-100']" :src="imageSrc" :alt="imageAlt">
+      <img :class="[$style['scryfall-image'], 'w-100']" :src="imageSrc" :alt="imageAlt" @load="$emit('imageLoaded')">
     </div>
     <div v-show="loading">
       <i class="fas fa-spinner fa-spin fa-10x"></i>
