@@ -3,6 +3,7 @@
 namespace App\Entity;
 
 use ApiPlatform\Core\Annotation\ApiResource;
+use App\Controller\Api\HighScoreDistinctController;
 use App\Repository\HighScoreRepository;
 use DateTimeImmutable;
 use Doctrine\ORM\Mapping as ORM;
@@ -11,6 +12,15 @@ use Symfony\Component\Serializer\Annotation\Groups;
 
 #[ORM\Entity(repositoryClass: HighScoreRepository::class)]
 #[ApiResource(
+    collectionOperations: [
+        "get",
+        "post",
+        'distinct' => [
+            'method' => 'get',
+            'path' => '/high_scores/distinct',
+            'controller' => HighScoreDistinctController::class,
+            'read' => false,
+        ]],
     denormalizationContext: ["groups" => ["high-score:write"]],
     normalizationContext: ["groups" => ["high-score:read"]],
     order: ["score" => "desc"]

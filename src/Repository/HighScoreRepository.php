@@ -19,32 +19,14 @@ class HighScoreRepository extends ServiceEntityRepository
         parent::__construct($registry, HighScore::class);
     }
 
-    // /**
-    //  * @return Highscore[] Returns an array of Highscore objects
-    //  */
-    /*
-    public function findByExampleField($value)
+    public function findGroupedByUser()
     {
-        return $this->createQueryBuilder('h')
-            ->andWhere('h.exampleField = :val')
-            ->setParameter('val', $value)
-            ->orderBy('h.id', 'ASC')
-            ->setMaxResults(10)
-            ->getQuery()
-            ->getResult()
+        $qb = $this
+            ->createQueryBuilder('h')
+            ->addSelect('MAX(h.score) as maxScore')
+            ->groupBy('h.user')
         ;
-    }
-    */
 
-    /*
-    public function findOneBySomeField($value): ?Highscore
-    {
-        return $this->createQueryBuilder('h')
-            ->andWhere('h.exampleField = :val')
-            ->setParameter('val', $value)
-            ->getQuery()
-            ->getOneOrNullResult()
-        ;
+        return $qb->getQuery()->getResult();
     }
-    */
 }

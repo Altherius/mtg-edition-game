@@ -38,7 +38,7 @@ export default {
     }
   },
   mounted() {
-    axios.get('/api/high_scores').then((response) => {
+    axios.get('/api/high_scores/distinct').then((response) => {
       let json = response.data;
       this.scores = json['hydra:member'];
       this.loading = false;
