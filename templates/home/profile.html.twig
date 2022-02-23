@@ -1,0 +1,50 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <div class="row">
+        <div class="col-12 col-md-6">
+            <div class="card">
+                <div class="card-header">
+                    <h3 class="text-center">My personal data</h3>
+                </div>
+                <div class="card-body">
+                    <p>
+                        Last name : {{ app.user.lastname }}
+                    </p>
+                    <p>
+                        First name : {{ app.user.firstname }}
+                    </p>
+                    <p>
+                        Email : {{ app.user.email }}
+                    </p>
+                </div>
+            </div>
+        </div>
+        <div class="col-12 col-md-6">
+            <div class="card">
+                <div class="card-header">
+                    <h3 class="text-center">My best scores</h3>
+                </div>
+                <div class="card-body">
+                    <table class="table">
+                        <thead>
+                        <tr>
+                            <th>Score</th>
+                            <th>Scored at</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        {% for score in scores %}
+                            <tr>
+                                <td>{{ score.score }}</td>
+                                <td>{{ score.scoredAt|date('d/m/Y H:i') }}</td>
+                            </tr>
+                        {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+

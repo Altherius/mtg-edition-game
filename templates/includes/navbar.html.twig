@@ -4,7 +4,9 @@
         <span class="navbar-text">
             <i class="fas fa-user"></i>
             {% if app.user %}
-                Logged in as {{ app.user.firstname }} {{ app.user.lastname }} - <a href="{{ path('app_logout') }}">Log out</a>
+                Logged in as {{ app.user.firstname }} {{ app.user.lastname }} -
+                <a href="{{ path('profile') }}">Profile</a> -
+                <a href="{{ path('app_logout') }}">Log out</a>
             {% else %}
                 <a href="{{ path('app_login') }}">Log in</a> or <a href="{{ path('app_register') }}">Create an account</a>
             {% endif %}

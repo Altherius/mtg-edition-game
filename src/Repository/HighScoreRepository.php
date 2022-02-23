@@ -3,8 +3,10 @@
 namespace App\Repository;
 
 use App\Entity\HighScore;
+use App\Entity\User;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
+use Symfony\Component\Security\Core\User\UserInterface;
 
 /**
  * @method HighScore|null find($id, $lockMode = null, $lockVersion = null)
@@ -25,8 +27,24 @@ class HighScoreRepository extends ServiceEntityRepository
             ->createQueryBuilder('h')
             ->addSelect('MAX(h.score) as maxScore')
             ->groupBy('h.user')
+            ->orderBy('maxScore', 'desc')
         ;
 
         return $qb->getQuery()->getResult();
+    }
+
+    public function findBest(UserInterface $user, int $limit = 15)
+    {
+        $qb = $this
+            ->createQueryBuilder('h')
+            ->andWhere('h.user = :user')
+            ->setParameter('user', $user)
+            ->orderBy('h.score', 'desc')
+        ;
+
+        $query = $qb->getQuery();
+        $query->setMaxResults($limit);
+
+        return $query->getResult();
     }
 }
