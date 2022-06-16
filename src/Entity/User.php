@@ -32,7 +32,6 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\Column(type: 'string', length: 180, unique: true)]
     #[Assert\NotBlank]
     #[Assert\Email]
-    #[Groups(["user:read", "user:write"])]
     private string $email;
 
     #[ORM\Column(type: 'json')]
