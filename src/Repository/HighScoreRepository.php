@@ -21,16 +21,16 @@ class HighScoreRepository extends ServiceEntityRepository
         parent::__construct($registry, HighScore::class);
     }
 
-    public function findGroupedByUser()
+    public function findHighScoresByUser()
     {
-        $qb = $this
-            ->createQueryBuilder('h')
-            ->addSelect('MAX(h.score) as maxScore')
-            ->groupBy('h.user')
-            ->orderBy('maxScore', 'desc')
-        ;
+        $em = $this->getEntityManager();
+        $query = $em->createQuery(
+            "select h from App\Entity\HighScore h where h.score =
+        (select max(h2.score) from App\Entity\HighScore h2 where h2.user = h.user)"
+        );
 
-        return $qb->getQuery()->getResult();
+
+        return $query->getResult();
     }
 
     public function findBest(UserInterface $user, int $limit = 15)

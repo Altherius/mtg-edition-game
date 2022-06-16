@@ -11,14 +11,6 @@ class HighScoreDistinctController extends AbstractController
 
     public function __invoke(): array
     {
-        $data = $this->repository->findGroupedByUser();
-        $scores = [];
-
-        foreach ($data as $score) {
-            $score[0]->setScore($score['maxScore']);
-            $scores[] = $score[0];
-        }
-
-        return $scores;
+        return $this->repository->findHighScoresByUser();
     }
 }
