@@ -26,7 +26,7 @@ class HighScoreRepository extends ServiceEntityRepository
         $em = $this->getEntityManager();
         $query = $em->createQuery(
             "select h from App\Entity\HighScore h where h.score =
-        (select max(h2.score) from App\Entity\HighScore h2 where h2.user = h.user)"
+        (select max(h2.score) from App\Entity\HighScore h2 where h2.user = h.user) order by h.score desc"
         );
 
 
