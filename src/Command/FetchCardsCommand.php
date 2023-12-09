@@ -75,10 +75,8 @@ class FetchCardsCommand extends Command
 
             } catch (GuzzleException $e) {
                 $io->error('Error while querying Scryfall: ' . $e->getMessage());
-                return 1;
             } catch (JsonException $e) {
                 $io->error('Error while converting data: ' . $e->getMessage());
-                return 1;
             }
 
             $this->manager->flush();
